@@ -48,7 +48,7 @@ function seleccionarMascotaEnemigo(){
     }
 }
 
-//funciones del ataque y enviar una alerta
+//funciones del ataque
 function ataqueFuego(){
     ataqueJugador = 'FUERGO'
     ataqueAleatorioEnemigo()
@@ -73,7 +73,19 @@ function ataqueAleatorioEnemigo(){
         ataqueEnemigo = 'TIERRA'
     }
     
+    crearMensaje()
 }
+
+//uso de cleateElement y appendChild
+function crearMensaje(){
+    let sectionMensajes = document.getElementById('mensaje')
+    //p es una etiqueta para parrafos
+    let parrafo = document.createElement('p')
+    parrafo.innerHTML  = 'Tu mascota atacó con ' + ataqueJugador + ' ,la mascota del enemigo atacó con ' + ataqueEnemigo + ' PENDIENTE'
+
+    sectionMensajes.appendChild(parrafo)
+}
+
 //numero aleatorio
 function aleatorio(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min)
