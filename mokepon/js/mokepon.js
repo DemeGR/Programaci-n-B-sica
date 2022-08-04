@@ -1,4 +1,4 @@
-//varaible global
+//varaibles globales
 let ataqueJugador 
 let ataqueEnemigo
 let vidasJugador = 3
@@ -111,8 +111,26 @@ function combate(){
                 vidasJugador--
                 spanVidasJugador.innerHTML = vidasJugador
                }
+
+     revisarVidas()          
 }
 
+function revisarVidas(){
+    if(vidasEnemigo == 0){
+        crearMensajeFinal("¡GANASTE! :)")
+    }else if(vidasJugador == 0){
+        crearMensajeFinal("¡PERDISTE! :(")        
+    }
+}
+
+function crearMensajeFinal(resultadoFinal){
+    let sectionMensajes = document.getElementById('mensaje')
+    //p es una etiqueta para parrafos
+    let parrafo = document.createElement('p')
+    parrafo.innerHTML  = resultadoFinal
+
+    sectionMensajes.appendChild(parrafo)
+}
 
 //confirmar que el html haya cargado todo, despues, llamar 
 //iniciarJuego()
