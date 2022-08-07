@@ -1,25 +1,33 @@
 .titulo{
     color: hotpink;
-    width: 350px;
-    height: 50px;
-    background-color: teal;
+    background-color: white;
 }
 
 #seleccionar-mascota{
-    display: flex ;
+    background-color: #d8f700ad;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 717px;
+    
 }
 
 .tarjeta-de-mokepon{
-    width: 100px;
-    height: 100px;
-    background: aquamarine;
+    width: 84px;
+    height: 42px;
+    background: #00c68347;
     padding: 10px;
     box-sizing: border-box;
 }
 
-input{
-    display: none;
+#boton-mascota{
+    width: 100px;
+    height: 50px;
+    background: #915123d1;
+    padding: 10px;
+    box-sizing: border-box;
 }
+
+
+
