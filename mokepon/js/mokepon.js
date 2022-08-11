@@ -30,7 +30,7 @@ function seleccionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'//style mofica propedades. display oculta los 
     //elementos HTML 
     let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
-    sectionSeleccionarAtaque.style.display = 'block'//style mofica propedades. display muestr los 
+    sectionSeleccionarAtaque.style.display = 'flex'//style mofica propedades. display muestr los 
     //elementos HTML 
 
    let inputHipodoge = document.getElementById('hipodoge')
