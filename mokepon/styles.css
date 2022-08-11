@@ -1,15 +1,24 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body{
     font-family: 'Fredoka One', cursive;
     background-color: #041562;
+=======
+.titulo{
+    color: hotpink;
+    background-color: white;
+>>>>>>> 27f845a59d0236bec2d33691b18d5138d181e7f8
 }
 
 #seleccionar-mascota{
-    display: flex ;
+    background-color: #d8f700ad;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 717px;
+    
 }
 
 .titulo{
@@ -28,9 +37,15 @@ body{
 }
 
 .tarjeta-de-mokepon{
+<<<<<<< HEAD
     width: 180px;
     height: 100px;
     background: #11468F;
+=======
+    width: 84px;
+    height: 42px;
+    background: #00c68347;
+>>>>>>> 27f845a59d0236bec2d33691b18d5138d181e7f8
     padding: 10px;
     box-sizing: border-box;
     border-radius: 20px;
@@ -44,6 +59,13 @@ body{
     width: 80px;
 }
 
-input{
-    display: none;
+#boton-mascota{
+    width: 100px;
+    height: 50px;
+    background: #915123d1;
+    padding: 10px;
+    box-sizing: border-box;
 }
+
+
+
