@@ -72,7 +72,25 @@ input{
     box-sizing: border-box;
     border-radius: 20px;
     border-color: transparent;
-    width: 100px;
+    width: 180px;
     color:white;
+    font-family: 'Poppins', sans-serif;
+}
+
+#mensaje{
+    
+        width: 280px;
+        background: #EEEEEE;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+}
+
+#boton-reiniciar{
+    border: none;
+    color:#11468F;
     font-family: 'Poppins', sans-serif;
 }
