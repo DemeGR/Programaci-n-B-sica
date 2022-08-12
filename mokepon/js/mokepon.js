@@ -34,20 +34,44 @@ class Mokepon{
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.ataques = []
     }
 }
 
-//Objetos
+//Objetos de instancias que se construyen por la clase
 let hipodoge = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', 5)
 
 let capipepo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack.png',5)
 
 let ratigueya = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5)
 
-mokepones.push(hipodoge, capipepo,ratigueya)
+//creacion de un objeto
+hipodoge.ataques.push( 
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🪴', id: 'boton-tierra' },
+)
 
-console.log(mokepones)//llama el arreglo 
+//creacion de un objeto
+capipepo.ataques.push( 
+    { nombre: '🪴', id: 'boton-tierra' },
+    { nombre: '🪴', id: 'boton-tierra' },
+    { nombre: '🪴', id: 'boton-tierra' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    
+)
 
+//creacion de un objeto
+ratigueya.ataques.push( 
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🪴', id: 'boton-tierra' },
+)
 
 function iniciarJuego(){
     
