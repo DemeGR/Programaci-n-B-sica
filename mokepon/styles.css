@@ -1,3 +1,4 @@
+/*Para comentar, usar: */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300&display=swap');
 
 body{
@@ -59,6 +60,10 @@ body{
 
 input{
     display: none;
+}
+
+input:checked + label{
+    background-color: #5d8bf4;
 }
 
 #seleccionar-ataque{
