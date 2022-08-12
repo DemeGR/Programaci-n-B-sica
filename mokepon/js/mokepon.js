@@ -96,7 +96,7 @@ function ataqueAleatorioEnemigo(){
     combate()
 }
 
-//uso de cleateElement y appendChild
+//uso de cleateElement 
 function crearMensaje(resultado){
     let sectionMensajes = document.getElementById('resultado')
     let ataquesDelJugador = document.getElementById('ataques-del-jugador')
