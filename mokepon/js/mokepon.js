@@ -28,7 +28,7 @@ let opcionDeMokepones
 let inputHipodoge 
 let inputCapipepo 
 let inputRatigueya 
-
+let mascotaJugador
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -124,16 +124,31 @@ function seleccionarMascotaJugador(){
    //la seccion seleccionar-ataque
    if(inputHipodoge.checked){//checked checa si es falso o true el ratio
         spanMascotaJugador.innerHTML = inputHipodoge.id      //Una sola fuente. Se llama directamente el nombre objeto por medio de su id.
-   } else if(inputCapipepo.checked){
+        mascotaJugador = inputHipodoge.id
+    } else if(inputCapipepo.checked){
         spanMascotaJugador.innerHTML =inputCapipepo.id
+        mascotaJugador = inputCapipepo.id
    } else if(inputRatigueya.checked){
         spanMascotaJugador.innerHTML = inputRatigueya     //.innerHTML va agregando textos
+        mascotaJugador = inputRatigueya.id     //se guarda el nombre de la mascota seleccionada 
    }else{
-        alert('Selecciona a una mascota')
+        alert('Selecciona una mascota')
    }
 
+   extraerAtaques(mascotaJugador)
    //llamar funcion seleccion del enemigo
    seleccionarMascotaEnemigo()
+}
+
+function extraerAtaques(mascotaJugador){
+    let ataques
+    for (let i = 0; i < mokepones.length; i++){
+        if (mascotaJugador == mokepones[i].nombre){
+                ataques = mokepones[i].ataques
+        }
+    }
+    
+    mostrarAtaques(ataques)
 }
 
 //funcion seleccionar mascota enemigo
@@ -142,7 +157,7 @@ function seleccionarMascotaEnemigo(){
                                                             //mokepones.length: logitud de la cadena
                                                             //-1: porque la logitud de un array es una menos
     
-  spanMascotaEnemigo.innerHTML = mokepones[mascotaAletoria].nombre
+  spanMascotaEnemigo.innerHTML = mokepones[mascotaAletoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
 }
 
 //funciones del ataque
