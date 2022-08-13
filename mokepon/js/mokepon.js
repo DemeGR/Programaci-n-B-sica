@@ -127,7 +127,7 @@ function seleccionarMascotaJugador(){
    } else if(inputCapipepo.checked){
         spanMascotaJugador.innerHTML =inputCapipepo.id
    } else if(inputRatigueya.checked){
-        spanMascotaJugador.innerHTML = inputRatigueya
+        spanMascotaJugador.innerHTML = inputRatigueya     //.innerHTML va agregando textos
    }else{
         alert('Selecciona a una mascota')
    }
@@ -138,16 +138,11 @@ function seleccionarMascotaJugador(){
 
 //funcion seleccionar mascota enemigo
 function seleccionarMascotaEnemigo(){
-    let mascotaAletoria = aleatorio(1,3)
+    let mascotaAletoria = aleatorio(0,mokepones.length -1)  //0: desde el indice cero
+                                                            //mokepones.length: logitud de la cadena
+                                                            //-1: porque la logitud de un array es una menos
     
-
-    if(mascotaAletoria == 1){
-        spanMascotaEnemigo.innerHTML = 'Hipodoge' //se inserta en el html el nombre de la mascota 
-    }else if(mascotaAletoria == 2){
-        spanMascotaEnemigo.innerHTML = 'Capipepo'
-    }else{
-        spanMascotaEnemigo.innerHTML = 'Ratigueya'
-    }
+  spanMascotaEnemigo.innerHTML = mokepones[mascotaAletoria].nombre
 }
 
 //funciones del ataque

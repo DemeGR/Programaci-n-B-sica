@@ -107,6 +107,11 @@ input:checked + label{
     color: white;
 }
 
+#vidas-jugador, #vidas-enemigo {
+    font-size: 32px;
+    margin-bottom: 0;
+  }
+
 .ataques-jugador, .ataques-enemigo{
     display: flex;
     flex-direction: column;
