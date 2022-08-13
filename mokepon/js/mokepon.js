@@ -24,15 +24,11 @@ const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 let mokepones = [] //arreglo
 let ataqueJugador 
 let ataqueEnemigo
-<<<<<<< HEAD
 let opcionDeMokepones 
 let inputHipodoge 
 let inputCapipepo 
 let inputRatigueya 
 
-=======
-let opcionDeMokepones
->>>>>>> 2b42e5e2aaaf08e03eb288c3a1357d4de130324a
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -81,11 +77,7 @@ ratigueya.ataques.push(
     { nombre: '🪴', id: 'boton-tierra' },
 )
 
-<<<<<<< HEAD
 mokepones.push(hipodoge, capipepo,ratigueya)
-=======
-mokepones.push(hipodoge,capipepo,ratigueya)
->>>>>>> 2b42e5e2aaaf08e03eb288c3a1357d4de130324a
 
 function iniciarJuego(){
     
@@ -107,18 +99,6 @@ function iniciarJuego(){
          inputRatigueya = document.getElementById('Ratigueya')
     })
     
-    mokepones.forEach((mokepon) =>{
-        opcionDeMokepones = `
-        <input type="radio" name="mascota" id= ${mokepon.nombre}/>
-                <label class="tarjeta-de-mokepon" for = ${mokepon.nombre}>
-                    <p>${mokepon.nombre}</p>
-                    <img src= ${mokepon.foto} alt=${mokepon.nombre}>
-                </label>
-        `
-        contenedorTarjetas.innerHTML += opcionDeMokepones 
-    
-    })
-
     sectionReiniciar.style.display = 'none'//que contiene el boton reiniciar
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
@@ -143,11 +123,11 @@ function seleccionarMascotaJugador(){
    //checar que mascota se selecciono y mostrarlo en 
    //la seccion seleccionar-ataque
    if(inputHipodoge.checked){//checked checa si es falso o true el ratio
-        spanMascotaJugador.innerHTML ='Hipodoge'
+        spanMascotaJugador.innerHTML = inputHipodoge.id
    } else if(inputCapipepo.checked){
-        spanMascotaJugador.innerHTML ='Capipepo'
+        spanMascotaJugador.innerHTML =inputCapipepo.id
    } else if(inputRatigueya.checked){
-        spanMascotaJugador.innerHTML ='Ratigueya'
+        spanMascotaJugador.innerHTML = inputRatigueya
    }else{
         alert('Selecciona a una mascota')
    }
