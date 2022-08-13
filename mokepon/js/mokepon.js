@@ -123,7 +123,7 @@ function seleccionarMascotaJugador(){
    //checar que mascota se selecciono y mostrarlo en 
    //la seccion seleccionar-ataque
    if(inputHipodoge.checked){//checked checa si es falso o true el ratio
-        spanMascotaJugador.innerHTML = inputHipodoge.id
+        spanMascotaJugador.innerHTML = inputHipodoge.id      //Una sola fuente. Se llama directamente el nombre objeto por medio de su id.
    } else if(inputCapipepo.checked){
         spanMascotaJugador.innerHTML =inputCapipepo.id
    } else if(inputRatigueya.checked){
