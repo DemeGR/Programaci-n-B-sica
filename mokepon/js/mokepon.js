@@ -22,7 +22,7 @@ const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
 
 let mokepones = [] //arreglo de mokepones
-let ataqueJugador 
+let ataqueJugador = []
 let ataqueEnemigo
 let opcionDeMokepones 
 let inputHipodoge 
@@ -32,7 +32,8 @@ let mascotaJugador
 let ataquesMokepon
 let botonFuego      //En estas alturas los botones aun no existen en HTML
 let botonAgua       //En estas alturas los botones aun no existen en HTML
-let botonTierra  //En estas alturas los botones aun no existen en HTML     
+let botonTierra  //En estas alturas los botones aun no existen en HTML    
+let botones = [] //para los botones de ataques
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -88,7 +89,7 @@ function iniciarJuego(){
     sectionSeleccionarAtaque.style.display = 'none'//style mofica propedades. display oculta los 
     //elementos HTML
 
-    mokepones.forEach((mokepon) => {
+    mokepones.forEach((mokepon) => { 
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre} />
         <label class="tarjeta-de-mokepon" for = ${mokepon.nombre}>
@@ -96,7 +97,7 @@ function iniciarJuego(){
             <img src=${mokepon.foto} alt=${mokepon.nombre}>
         </label>
         `
-        contenedorTarjetas.innerHTML += opcionDeMokepones
+        contenedorTarjetas.innerHTML += opcionDeMokepones //AGREGA MOKEPONES EN HTML
 
          inputHipodoge = document.getElementById('Hipodoge')
          inputCapipepo = document.getElementById('Capipepo')
@@ -154,7 +155,7 @@ function extraerAtaques(mascotaJugador){
 function mostrarAtaques(ataques){
     ataques.forEach((ataque) =>{ // para esta linea de codigo los botones ya existen
         ataquesMokepon = `
-        <button id=${ataque.id} class="boton-de-ataque">${ataque.nombre}</button>
+        <button id=${ataque.id} class="boton-de-ataque BAtaque">${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesMokepon //Los botones son inyectados directamente en HTML y ya existen
     })
@@ -162,12 +163,28 @@ function mostrarAtaques(ataques){
      botonFuego = document.getElementById('boton-fuego') //A estas alturas los botones ya existen
      botonAgua = document.getElementById('boton-agua')//A estas alturas los botones ya existen
      botonTierra = document.getElementById('boton-tierra')
+     botones = document.querySelectorAll('.BAtaque')
 
-    botonFuego.addEventListener('click', ataqueFuego)
-    
-    botonAgua.addEventListener('click', ataqueAgua)
-    
-    botonTierra.addEventListener('click', ataqueTierra)
+}
+
+function secuenciaAtaque(){
+    botones.forEach((boton) => {
+        boton.addEventListener('click',(e) => {
+            if(e.target.textContent ==='🔥'){
+                ataqueJugador.push('FUEGO')
+                console.log(ataqueJugador)
+                boton.style.background= '#112f58'
+            }else if(e.target.textContent === '💧'){
+                ataqueJugador.push('AGUA')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'
+            }else{
+                ataqueJugador.push('TIERRA')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'
+            }
+        })
+    })
 }
 
 //funcion seleccionar mascota enemigo
@@ -177,21 +194,9 @@ function seleccionarMascotaEnemigo(){
                                                             //-1: porque la logitud de un array es una menos
     
   spanMascotaEnemigo.innerHTML = mokepones[mascotaAletoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
+  secuenciaAtaque()
 }
 
-//funciones del ataque
-function ataqueFuego(){
-    ataqueJugador = 'FUERGO'
-    ataqueAleatorioEnemigo()
-}
-function ataqueAgua(){
-    ataqueJugador = 'AGUA'
-    ataqueAleatorioEnemigo()
-}
-function ataqueTierra(){
-    ataqueJugador = 'TIERRA'
-    ataqueAleatorioEnemigo()
-}
 
 function ataqueAleatorioEnemigo(){
     let ataqueAleatorio = aleatorio(1,3)
