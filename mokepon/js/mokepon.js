@@ -1,11 +1,10 @@
 //varaibles globales
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')//ocultar la seccion reiniciar
-const botonTierra = document.getElementById('boton-tierra')
-const botonFuego = document.getElementById('boton-fuego')
-const botonAgua = document.getElementById('boton-agua')
-const botonMascotaJugador = document.getElementById('boton-mascota')
+
 const botonReiniciar = document.getElementById('boton-reiniciar')
+const botonMascotaJugador = document.getElementById('boton-mascota')
+
 
 
 const spanMascotaJugador = document.getElementById('mascota-jugador')
@@ -20,8 +19,9 @@ const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataques-del-jugador')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
+const contenedorAtaques = document.getElementById('contenedorAtaques')
 
-let mokepones = [] //arreglo
+let mokepones = [] //arreglo de mokepones
 let ataqueJugador 
 let ataqueEnemigo
 let opcionDeMokepones 
@@ -29,6 +29,10 @@ let inputHipodoge
 let inputCapipepo 
 let inputRatigueya 
 let mascotaJugador
+let ataquesMokepon
+let botonFuego      //En estas alturas los botones aun no existen en HTML
+let botonAgua       //En estas alturas los botones aun no existen en HTML
+let botonTierra  //En estas alturas los botones aun no existen en HTML     
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -104,11 +108,7 @@ function iniciarJuego(){
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
      //seleccion del ataque 
     
-    botonFuego.addEventListener('click', ataqueFuego)
     
-    botonAgua.addEventListener('click', ataqueAgua)
-    
-    botonTierra.addEventListener('click', ataqueTierra)
 
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
@@ -149,6 +149,25 @@ function extraerAtaques(mascotaJugador){
     }
     
     mostrarAtaques(ataques)
+}
+
+function mostrarAtaques(ataques){
+    ataques.forEach((ataque) =>{ // para esta linea de codigo los botones ya existen
+        ataquesMokepon = `
+        <button id=${ataque.id} class="boton-de-ataque">${ataque.nombre}</button>
+        `
+        contenedorAtaques.innerHTML += ataquesMokepon //Los botones son inyectados directamente en HTML y ya existen
+    })
+
+     botonFuego = document.getElementById('boton-fuego') //A estas alturas los botones ya existen
+     botonAgua = document.getElementById('boton-agua')//A estas alturas los botones ya existen
+     botonTierra = document.getElementById('boton-tierra')
+
+    botonFuego.addEventListener('click', ataqueFuego)
+    
+    botonAgua.addEventListener('click', ataqueAgua)
+    
+    botonTierra.addEventListener('click', ataqueTierra)
 }
 
 //funcion seleccionar mascota enemigo
