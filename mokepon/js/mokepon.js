@@ -35,6 +35,8 @@ let botonFuego      //En estas alturas los botones aun no existen en HTML
 let botonAgua       //En estas alturas los botones aun no existen en HTML
 let botonTierra  //En estas alturas los botones aun no existen en HTML    
 let botones = [] //para los botones de ataques
+let indexAtaquejugador
+let indexAtaqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -215,9 +217,14 @@ function ataqueAleatorioEnemigo(){
     }
     
     console.log(ataqueEnemigo)
-    combate()
+    iniciarPelea()
 }
 
+function iniciarPelea(){
+    if(ataqueJugador.length === 5){ //Primero seleccionar 5 ataques, depues lanazla validacion de quien gano 
+        combate()
+    }
+}
 //uso de cleateElement 
 function crearMensaje(resultado){
     
@@ -225,8 +232,8 @@ function crearMensaje(resultado){
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+    nuevoAtaqueDelJugador.innerHTML = indexAtaquejugador
+    nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
 
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
@@ -237,21 +244,19 @@ function aleatorio(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function indexAmbosOponentes(jugador, enemigo){
+    indexAtaquejugador = ataqueEnemigo[jugador]
+    indexAtaqueEnemigo = ataqueEnemigo[enemigo]
+}
+
 function combate(){
     
-    if(ataqueEnemigo == ataqueJugador){
-                crearMensaje("EMPATE🤦‍♂️")
-    }else if( (ataqueJugador == 'FUEGO' &&  ataqueEnemigo == 'TIERRA') ||
-               (ataqueJugador == 'AGUA' &&  ataqueEnemigo == 'FUEGO') ||
-               (ataqueJugador == 'TIERRA' &&  ataqueEnemigo == 'AGUA') ){
-                crearMensaje("GANASTE🥳")
-                vidasEnemigo--
-                spanVidasEnemigo.innerHTML = vidasEnemigo
-               }else{
-                crearMensaje("PERDISTE👎")
-                vidasJugador--
-                spanVidasJugador.innerHTML = vidasJugador
-               }
+    for (let index = 0; index < ataqueJugador.length; index++) {
+        if(ataqueJugador[index] === ataqueEnemigo[index]){
+            indexAmbosOponentes(index, index)
+            crearMensaje("EMPATE🙅")   
+        }
+    }
 
      revisarVidas()          
 }
