@@ -23,13 +23,14 @@ const contenedorAtaques = document.getElementById('contenedorAtaques')
 
 let mokepones = [] //arreglo de mokepones
 let ataqueJugador = []
-let ataqueEnemigo
+let ataqueEnemigo = []
 let opcionDeMokepones 
 let inputHipodoge 
 let inputCapipepo 
 let inputRatigueya 
 let mascotaJugador
 let ataquesMokepon
+let ataquesMokeponEnemigo
 let botonFuego      //En estas alturas los botones aun no existen en HTML
 let botonAgua       //En estas alturas los botones aun no existen en HTML
 let botonTierra  //En estas alturas los botones aun no existen en HTML    
@@ -37,7 +38,7 @@ let botones = [] //para los botones de ataques
 let vidasJugador = 3
 let vidasEnemigo = 3
 
-//Clases. Los clases debe de empezar con mayuscula
+//Clases. Los clases deben de empezar con mayuscula
 class Mokepon{
     constructor(nombre, foto, vida){
         this.nombre = nombre
@@ -60,14 +61,14 @@ hipodoge.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🪴', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
 )
 
 //creacion de un objeto
 capipepo.ataques.push( 
-    { nombre: '🪴', id: 'boton-tierra' },
-    { nombre: '🪴', id: 'boton-tierra' },
-    { nombre: '🪴', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🔥', id: 'boton-fuego' },
     
@@ -79,7 +80,7 @@ ratigueya.ataques.push(
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🪴', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
 )
 
 mokepones.push(hipodoge, capipepo,ratigueya)
@@ -130,7 +131,7 @@ function seleccionarMascotaJugador(){
         spanMascotaJugador.innerHTML =inputCapipepo.id
         mascotaJugador = inputCapipepo.id
    } else if(inputRatigueya.checked){
-        spanMascotaJugador.innerHTML = inputRatigueya     //.innerHTML va agregando textos
+        spanMascotaJugador.innerHTML = inputRatigueya.id     //.innerHTML va agregando textos
         mascotaJugador = inputRatigueya.id     //se guarda el nombre de la mascota seleccionada 
    }else{
         alert('Selecciona una mascota')
@@ -183,32 +184,37 @@ function secuenciaAtaque(){
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'
             }
+
+            ataqueAleatorioEnemigo() 
         })
     })
+    
 }
 
 //funcion seleccionar mascota enemigo
 function seleccionarMascotaEnemigo(){
-    let mascotaAletoria = aleatorio(0,mokepones.length -1)  //0: desde el indice cero
+    let mascotaAleatoria = aleatorio(0,mokepones.length -1)  //0: desde el indice cero
                                                             //mokepones.length: logitud de la cadena
                                                             //-1: porque la logitud de un array es una menos
     
-  spanMascotaEnemigo.innerHTML = mokepones[mascotaAletoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
+  spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
+  ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques    //guarda los ataques 
   secuenciaAtaque()
 }
 
 
 function ataqueAleatorioEnemigo(){
-    let ataqueAleatorio = aleatorio(1,3)
+    let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
-    if(ataqueAleatorio == 1){
-        ataqueEnemigo = 'FUEGO'
-    }else if(ataqueAleatorio == 2){
-        ataqueEnemigo = 'AGUA'
+    if( (ataqueAleatorio == 0) || (ataqueAleatorio == 1) ){
+        ataqueEnemigo.push('FUEGO')  //Agrega el ataque en el arreglo 
+    }else if((ataqueAleatorio == 3) || (ataqueAleatorio == 4)){
+        ataqueEnemigo.push('AGUA')
     }else{
-        ataqueEnemigo = 'TIERRA'
+        ataqueEnemigo.push('TIERRA')
     }
     
+    console.log(ataqueEnemigo)
     combate()
 }
 
