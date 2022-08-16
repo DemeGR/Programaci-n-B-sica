@@ -205,22 +205,34 @@ function seleccionarMascotaEnemigo(){
                                                             //-1: porque la logitud de un array es una menos
     
   spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
-  ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques    //guarda los ataques 
+  ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques    //guarda los ataques NOTA!
+  console.log(ataquesMokeponEnemigo)
+  console.log(ataquesMokeponEnemigo[2])
   secuenciaAtaque()
 }
 
 function ataqueAleatorioEnemigo(){
     let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
-
-    if( (ataqueAleatorio == 0) || (ataqueAleatorio == 1) ){
+    console.log(ataqueAleatorio)
+    if(ataquesMokeponEnemigo[ataqueAleatorio].nombre ==='🔥'){   //NOTA! Unos atques se guardan en "ataquesMokeponEnemigo", por tanto "ataquesMokeponEnemigo" puede obtener "nombre" del ataque que le pertenece a "ataques"
         ataqueEnemigo.push('FUEGO')  //Agrega el ataque en el arreglo 
-    }else if((ataqueAleatorio == 3) || (ataqueAleatorio == 4)){
+        console.log(ataqueEnemigo)
+    }else if(ataquesMokeponEnemigo[ataqueAleatorio].nombre === '💧'){
         ataqueEnemigo.push('AGUA')
+        console.log(ataqueEnemigo)
     }else{
         ataqueEnemigo.push('TIERRA')
+        console.log(ataqueEnemigo)
     }
-    
-    console.log(ataqueEnemigo)
+
+
+   // if( (ataqueAleatorio == 0) || (ataqueAleatorio == 1) ){
+      //  ataqueEnemigo.push('FUEGO')  //Agrega el ataque en el arreglo 
+   // }else if((ataqueAleatorio == 3) || (ataqueAleatorio == 4)){
+    //    ataqueEnemigo.push('AGUA')
+    //}else{
+    //    ataqueEnemigo.push('TIERRA')
+   // }
     iniciarPelea()
 }
 

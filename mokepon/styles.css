@@ -43,6 +43,11 @@ body{
     cursor: pointer;
 }
 
+.tarjeta-de-mokepon:hover{
+    width: 182px;
+    height: 110px;
+}
+
 .tarjeta-de-mokepon img{
     width: 80px;
 }
