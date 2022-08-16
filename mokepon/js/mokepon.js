@@ -59,6 +59,13 @@ let capipepo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack
 
 let ratigueya = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5)
 
+//nuevos jugadores
+let langostelvis = new Mokepon('Langostelvis','./assets/mokepons_mokepon_langostelvis_attack.png',5)
+
+let pydos = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5)
+
+let tucapalma = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5)
+
 //creacion de un objeto
 hipodoge.ataques.push( 
     { nombre: '💧', id: 'boton-agua' },
@@ -87,7 +94,7 @@ ratigueya.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
-mokepones.push(hipodoge, capipepo,ratigueya)
+mokepones.push(hipodoge, capipepo,ratigueya,langostelvis,pydos)
 
 function iniciarJuego(){
     
