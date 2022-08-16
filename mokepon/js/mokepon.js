@@ -20,6 +20,8 @@ const ataquesDelJugador = document.getElementById('ataques-del-jugador')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
+let vicJugador =0
+let vicEnemigo =0
 
 let mokepones = [] //arreglo de mokepones
 let ataqueJugador = []
@@ -245,7 +247,7 @@ function aleatorio(min, max){
 }
 
 function indexAmbosOponentes(jugador, enemigo){
-    indexAtaquejugador = ataqueEnemigo[jugador]
+    indexAtaquejugador = ataqueJugador[jugador]
     indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
@@ -255,17 +257,32 @@ function combate(){
         if(ataqueJugador[index] === ataqueEnemigo[index]){
             indexAmbosOponentes(index, index)
             crearMensaje("EMPATE🙅")   
-        }
+        }else if(( ataqueJugador[index] === 'FUEGO' &&  ataqueEnemigo[index] === 'TIERRA') ||
+                 (ataqueJugador[index] === 'AGUA' &&  ataqueEnemigo[index] === 'FUEGO') ||
+                 (ataqueJugador[index] === 'TIERRA' &&  ataqueEnemigo[index] === 'AGUA') ){
+                    indexAmbosOponentes(index, index)
+                    crearMensaje("GANASTE :)")   
+                    vicJugador ++
+                 }else{
+                    indexAmbosOponentes(index, index)
+                    crearMensaje("PERDISTE :)")
+                    vicEnemigo ++
+                 }
     }
 
-     revisarVidas()          
+     revisarVictoria()  
+     
+     
+//crearMensaje("GANASTE🥳")
 }
 
-function revisarVidas(){
-    if(vidasEnemigo == 0){
+function revisarVictoria(){
+    if(vicJugador == 3){
         crearMensajeFinal("¡GANASTE! :)")
-    }else if(vidasJugador == 0){
+    }else if(vicEnemigo == 3){
         crearMensajeFinal("¡PERDISTE! :(")        
+    }else{
+        crearMensajeFinal("EMPATE!-_-")
     }
 }
 
