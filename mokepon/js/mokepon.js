@@ -20,8 +20,6 @@ const ataquesDelJugador = document.getElementById('ataques-del-jugador')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
-let vicJugador =0
-let vicEnemigo =0
 
 let mokepones = [] //arreglo de mokepones
 let ataqueJugador = []
@@ -39,6 +37,8 @@ let botonTierra  //En estas alturas los botones aun no existen en HTML
 let botones = [] //para los botones de ataques
 let indexAtaquejugador
 let indexAtaqueEnemigo
+let victoriasJugador = 0
+let victoriasEnemigo = 0
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -206,7 +206,6 @@ function seleccionarMascotaEnemigo(){
   secuenciaAtaque()
 }
 
-
 function ataqueAleatorioEnemigo(){
     let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
@@ -252,37 +251,36 @@ function indexAmbosOponentes(jugador, enemigo){
 }
 
 function combate(){
-    
     for (let index = 0; index < ataqueJugador.length; index++) {
         if(ataqueJugador[index] === ataqueEnemigo[index]){
             indexAmbosOponentes(index, index)
             crearMensaje("EMPATE🙅")   
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
         }else if(( ataqueJugador[index] === 'FUEGO' &&  ataqueEnemigo[index] === 'TIERRA') ||
                  (ataqueJugador[index] === 'AGUA' &&  ataqueEnemigo[index] === 'FUEGO') ||
                  (ataqueJugador[index] === 'TIERRA' &&  ataqueEnemigo[index] === 'AGUA') ){
                     indexAmbosOponentes(index, index)
                     crearMensaje("GANASTE :)")   
-                    vicJugador ++
+                    victoriasJugador++
+                    spanVidasJugador.innerHTML = victoriasJugador
                  }else{
                     indexAmbosOponentes(index, index)
                     crearMensaje("PERDISTE :)")
-                    vicEnemigo ++
+                    victoriasEnemigo++
+                    spanVidasEnemigo.innerHTML = victoriasEnemigo
                  }
     }
-
-     revisarVictoria()  
-     
-     
-//crearMensaje("GANASTE🥳")
+     revisarVidas()  
 }
 
-function revisarVictoria(){
-    if(vicJugador == 3){
-        crearMensajeFinal("¡GANASTE! :)")
-    }else if(vicEnemigo == 3){
-        crearMensajeFinal("¡PERDISTE! :(")        
+function revisarVidas(){
+    if(victoriasJugador === victoriasEnemigo){
+        crearMensajeFinal("Esto fue un empate!")
+    }else if(victoriasJugador > victoriasEnemigo){
+        crearMensajeFinal("FELICITACIONES! Ganaste :)")        
     }else{
-        crearMensajeFinal("EMPATE!-_-")
+        crearMensajeFinal("Lo siendo, perdiste :(")  
     }
 }
 
