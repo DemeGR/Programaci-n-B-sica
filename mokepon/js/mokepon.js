@@ -53,36 +53,60 @@ let vidasEnemigo = 3
 
 //Clases. Los clases deben de empezar con mayuscula
 class Mokepon{
-    constructor(nombre, foto, vida){
+    constructor(nombre, foto, vida,fotoMapa,x=10,y=10 ){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
         this.ataque = []
-        this.x = 20    //se agregan x y y para poder mandener y actualizar los alores
-        this.y = 30
-        this.ancho = 80
-        this.alto = 80
+        this.x = x    //se agregan x y y para poder mandener y actualizar los alores
+        this.y = y
+        this.ancho = 40
+        this.alto = 40
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadx = 0
         this.velocidady = 0
+    }
+
+    pintarMokepon(){
+        lienzo.drawImage(  //cargar imagen
+        this.mapaFoto,
+        this.x,
+        this.y,
+        this.ancho,
+        this.alto
+    )
     }
 }
 
 //Objetos de instancias que se construyen por la clase
-let hipodoge = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', 5)
+let hipodoge = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.png')
 
-let capipepo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack.png',5)
+let capipepo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack.png',5, './assets/capipepo.png')
 
-let ratigueya = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5)
+let ratigueya = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5, './assets/ratigueya.png')
 
 //nuevos jugadores
-let langostelvis = new Mokepon('Langostelvis','./assets/mokepons_mokepon_langostelvis_attack.png',5)
+let langostelvis = new Mokepon('Langostelvis','./assets/mokepons_mokepon_langostelvis_attack.png',5,'./assets/langostelvis.png')
 
-let pydos = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5)
+let pydos = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5,'./assets/pydos.png')
 
-let tucapalma = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5)
+let tucapalma = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5,'./assets/tucapalma.png')
+
+
+let hipodogeEnemigo = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.png',80,120)
+
+let capipepoEnemigo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack.png',5, './assets/capipepo.png',150,95)
+
+let ratigueyaEnemigo = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5, './assets/ratigueya.png',200,190)
+
+//nuevos jugadores
+let langostelvisEnemigo = new Mokepon('Langostelvis','./assets/mokepons_mokepon_langostelvis_attack.png',5,'./assets/langostelvis.png',220,60)
+
+let pydosEnemigo = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5,'./assets/pydos.png', 100,70)
+
+let tucapalmaEnemigo = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5,'./assets/tucapalma.png',180,20)
 
 //creacion de un objeto
 hipodoge.ataques.push( 
@@ -389,13 +413,15 @@ function pintarCanvas(){
         mapa.width,
         mapa.height
     )
-    lienzo.drawImage(  //cargar imagen
-        mascotaJugadorObjeto.mapaFoto,
-        mascotaJugadorObjeto.x,
-        mascotaJugadorObjeto.y,
-        mascotaJugadorObjeto.ancho,
-        mascotaJugadorObjeto.alto
-    )
+    
+    mascotaJugadorObjeto.pintarMokepon()
+    hipodogeEnemigo.pintarMokepon()
+    capipepoEnemigo.pintarMokepon()
+    ratigueyaEnemigo.pintarMokepon()
+    pydosEnemigo.pintarMokepon()
+    tucapalmaEnemigo.pintarMokepon()
+    langostelvisEnemigo.pintarMokepon()
+
 }
 
 function moverDerecha(){
