@@ -33,7 +33,8 @@ let ataquesMokepon
 let ataquesMokeponEnemigo
 let botonFuego      //En estas alturas los botones aun no existen en HTML
 let botonAgua       //En estas alturas los botones aun no existen en HTML
-let botonTierra  //En estas alturas los botones aun no existen en HTML    
+let botonTierra  //En estas alturas los botones aun no existen en HTML   
+let botonAire 
 let botones = [] //para los botones de ataques
 let indexAtaquejugador
 let indexAtaqueEnemigo
@@ -80,7 +81,7 @@ capipepo.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💨', id: 'boton-aire' },
     { nombre: '🔥', id: 'boton-fuego' },
     
 )
@@ -94,7 +95,32 @@ ratigueya.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
-mokepones.push(hipodoge, capipepo,ratigueya,langostelvis,pydos)
+langostelvis.ataques.push( 
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+tucapalma.ataques.push( 
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+pydos.ataques.push( 
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+
+mokepones.push(hipodoge, capipepo,ratigueya,langostelvis,pydos,tucapalma)
 
 function iniciarJuego(){
     
@@ -114,6 +140,9 @@ function iniciarJuego(){
          inputHipodoge = document.getElementById('Hipodoge')
          inputCapipepo = document.getElementById('Capipepo')
          inputRatigueya = document.getElementById('Ratigueya')
+         inputLangostelvis = document.getElementById('Langostelvis')
+         inputTucapalma = document.getElementById('Tucapalma')
+         inputPydos = document.getElementById('Pydos')
     })
     
     sectionReiniciar.style.display = 'none'//que contiene el boton reiniciar
@@ -139,14 +168,23 @@ function seleccionarMascotaJugador(){
         spanMascotaJugador.innerHTML = inputHipodoge.id      //Una sola fuente. Se llama directamente el nombre objeto por medio de su id.
         mascotaJugador = inputHipodoge.id
     } else if(inputCapipepo.checked){
-        spanMascotaJugador.innerHTML =inputCapipepo.id
-        mascotaJugador = inputCapipepo.id
-   } else if(inputRatigueya.checked){
-        spanMascotaJugador.innerHTML = inputRatigueya.id     //.innerHTML va agregando textos
-        mascotaJugador = inputRatigueya.id     //se guarda el nombre de la mascota seleccionada 
-   }else{
-        alert('Selecciona una mascota')
-   }
+         spanMascotaJugador.innerHTML =inputCapipepo.id
+         mascotaJugador = inputCapipepo.id
+      } else if(inputRatigueya.checked){
+          spanMascotaJugador.innerHTML = inputRatigueya.id     //.innerHTML va agregando textos
+          mascotaJugador = inputRatigueya.id     //se guarda el nombre de la mascota seleccionada 
+       }else if(inputLangostelvis.checked){
+           spanMascotaJugador.innerHTML =inputLangostelvis.id
+           mascotaJugador = inputLangostelvis.id
+         }else if(inputTucapalma.checked){
+            spanMascotaJugador.innerHTML =inputTucapalma.id
+            mascotaJugador = inputTucapalma.id
+           }else if(inputPydos.checked){
+             spanMascotaJugador.innerHTML =inputPydos.id
+             mascotaJugador = inputPydos.id
+            }else{
+            alert('Selecciona una mascota')
+           }
 
    extraerAtaques(mascotaJugador)
    //llamar funcion seleccion del enemigo
@@ -175,6 +213,7 @@ function mostrarAtaques(ataques){
      botonFuego = document.getElementById('boton-fuego') //A estas alturas los botones ya existen
      botonAgua = document.getElementById('boton-agua')//A estas alturas los botones ya existen
      botonTierra = document.getElementById('boton-tierra')
+     botonAire = document.getElementById('boton-aire')
      botones = document.querySelectorAll('.BAtaque')
 
 }
@@ -189,6 +228,16 @@ function secuenciaAtaque(){
                 boton.disabled = true
             }else if(e.target.textContent === '💧'){
                 ataqueJugador.push('AGUA')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'
+                boton.disabled = true
+            }else if(e.target.textContent === '💧'){
+                ataqueJugador.push('AGUA')
+                console.log(ataqueJugador)
+                boton.style.background = '#112f58'
+                boton.disabled = true
+            }else if(e.target.textContent === '💨'){
+                ataqueJugador.push('AIRE')
                 console.log(ataqueJugador)
                 boton.style.background = '#112f58'
                 boton.disabled = true
@@ -227,19 +276,14 @@ function ataqueAleatorioEnemigo(){
     }else if(ataquesMokeponEnemigo[ataqueAleatorio].nombre === '💧'){
         ataqueEnemigo.push('AGUA')
         console.log(ataqueEnemigo)
+    }else if(ataquesMokeponEnemigo[ataqueAleatorio].nombre === '💨'){
+        ataqueEnemigo.push('AIRE')
+        console.log(ataqueEnemigo)
     }else{
         ataqueEnemigo.push('TIERRA')
         console.log(ataqueEnemigo)
     }
 
-
-   // if( (ataqueAleatorio == 0) || (ataqueAleatorio == 1) ){
-      //  ataqueEnemigo.push('FUEGO')  //Agrega el ataque en el arreglo 
-   // }else if((ataqueAleatorio == 3) || (ataqueAleatorio == 4)){
-    //    ataqueEnemigo.push('AGUA')
-    //}else{
-    //    ataqueEnemigo.push('TIERRA')
-   // }
     iniciarPelea()
 }
 
@@ -279,7 +323,8 @@ function combate(){
             crearMensaje("EMPATE🙅")   
         }else if(( ataqueJugador[index] === 'FUEGO' &&  ataqueEnemigo[index] === 'TIERRA') ||
                  (ataqueJugador[index] === 'AGUA' &&  ataqueEnemigo[index] === 'FUEGO') ||
-                 (ataqueJugador[index] === 'TIERRA' &&  ataqueEnemigo[index] === 'AGUA') ){
+                 (ataqueJugador[index] === 'TIERRA' &&  ataqueEnemigo[index] === 'AGUA') ||
+                 (ataqueJugador[index] === 'AIRE' &&  ataqueEnemigo[index] === 'TIERRA') ){
                     indexAmbosOponentes(index, index)
                     crearMensaje("GANASTE :)")   
                     victoriasJugador++
