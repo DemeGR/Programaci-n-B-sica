@@ -43,7 +43,8 @@ let indexAtaquejugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
-let lienzo = mapa.getContext("2d") //2d porque se va a trabajar en 2 dimensiones 
+let lienzo = mapa.getContext("2d") //2d porque se va a trabajar en 2 dimensiones
+let intervalo 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -61,6 +62,8 @@ class Mokepon{
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.velocidadx = 0
+        this.velocidady = 0
     }
 }
 
@@ -176,6 +179,8 @@ function seleccionarMascotaJugador(){
     
     sectionVerMapa.style.display = 'flex'
 
+    
+    intervalo = setInterval(pintarPersonaje, 50)
 
    //checar que mascota se selecciono y mostrarlo en 
    //la seccion seleccionar-ataque
@@ -372,6 +377,8 @@ function crearMensajeFinal(resultadoFinal){
 }
 
 function pintarPersonaje(){
+    capipepo.x = capipepo.x + capipepo.velocidadx
+    capipepo.y = capipepo.y + capipepo.velocidady
     lienzo.clearRect(0,0,mapa.width,mapa.height )
     lienzo.drawImage(  //cargar imagen
         capipepo.mapaFoto,
@@ -382,13 +389,29 @@ function pintarPersonaje(){
     )
 }
 
-function moverCapipepo(){
-    capipepo.x = capipepo.x + 5 //se va a mover 5 px en x
-    pintarPersonaje()
+function moverDerecha(){
+    capipepo.velocidadx =  5 //se va a mover 5 px continuamente 
+}
+
+function moverIzquierda(){
+    capipepo.velocidadx = - 5  
+}
+
+function moverAbajo(){
+    capipepo.velocidady = 5  
+}
+
+function moverArriba(){
+    capipepo.velocidady = -5
+}
+
+function detenerMovimiendo(){
+    capipepo.velocidadx = 0
+    capipepo.velocidady = 0
 }
 
 function reiniciarJuego(){
-    location.reload()
+    location.reload() 
 }
 //confirmar que el html haya cargado todo, despues, llamar 
 //iniciarJuego()
