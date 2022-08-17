@@ -54,6 +54,13 @@ class Mokepon{
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.ataque = []
+        this.x = 20    //se agregan x y y para poder mandener y actualizar los alores
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
     }
 }
 
@@ -168,15 +175,6 @@ function seleccionarMascotaJugador(){
     //elementos HTML
     
     sectionVerMapa.style.display = 'flex'
-    let imagenDeCapipepo = new Image()
-    imagenDeCapipepo.src = capipepo.foto
-    lienzo.drawImage(  //cargar imagen
-        imagenDeCapipepo,
-        20,
-        40,
-        100,
-        100
-    )
 
 
    //checar que mascota se selecciono y mostrarlo en 
@@ -371,6 +369,22 @@ function crearMensajeFinal(resultadoFinal){
     sectionMensajes.innerHTML  = resultadoFinal
 
     sectionReiniciar.style.display = 'block'//que contiene el boton reiniciar
+}
+
+function pintarPersonaje(){
+    lienzo.clearRect(0,0,mapa.width,mapa.height )
+    lienzo.drawImage(  //cargar imagen
+        capipepo.mapaFoto,
+        capipepo.x,
+        capipepo.y,
+        capipepo.ancho,
+        capipepo.alto
+    )
+}
+
+function moverCapipepo(){
+    capipepo.x = capipepo.x + 5 //se va a mover 5 px en x
+    pintarPersonaje()
 }
 
 function reiniciarJuego(){
