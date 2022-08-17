@@ -21,6 +21,9 @@ const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
 
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
+
 let mokepones = [] //arreglo de mokepones
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -40,6 +43,7 @@ let indexAtaquejugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0
+let lienzo = mapa.getContext("2d") //2d porque se va a trabajar en 2 dimensiones 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -126,6 +130,7 @@ function iniciarJuego(){
     
     sectionSeleccionarAtaque.style.display = 'none'//style mofica propedades. display oculta los 
     //elementos HTML
+    sectionVerMapa.style.display = 'none'
 
     mokepones.forEach((mokepon) => { 
         opcionDeMokepones = `
@@ -159,8 +164,20 @@ function seleccionarMascotaJugador(){
     sectionSeleccionarMascota.style.display = 'none'//style mofica propedades. display oculta los 
     //elementos HTML 
     
-    sectionSeleccionarAtaque.style.display = 'flex'//style mofica propedades. display muestr los 
-    //elementos HTML 
+    //sectionSeleccionarAtaque.style.display = 'flex'//style mofica propedades. display muestr los 
+    //elementos HTML
+    
+    sectionVerMapa.style.display = 'flex'
+    let imagenDeCapipepo = new Image()
+    imagenDeCapipepo.src = capipepo.foto
+    lienzo.drawImage(  //cargar imagen
+        imagenDeCapipepo,
+        20,
+        40,
+        100,
+        100
+    )
+
 
    //checar que mascota se selecciono y mostrarlo en 
    //la seccion seleccionar-ataque
