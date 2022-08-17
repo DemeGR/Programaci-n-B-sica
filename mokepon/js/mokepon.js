@@ -179,8 +179,7 @@ function seleccionarMascotaJugador(){
     
     sectionVerMapa.style.display = 'flex'
 
-    
-    intervalo = setInterval(pintarPersonaje, 50)
+    iniciarMapa()
 
    //checar que mascota se selecciono y mostrarlo en 
    //la seccion seleccionar-ataque
@@ -408,6 +407,35 @@ function moverArriba(){
 function detenerMovimiendo(){
     capipepo.velocidadx = 0
     capipepo.velocidady = 0
+}
+
+function sePresionoUnaTecla(event){
+    console.log(event.key)
+
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break;
+         case 'ArrowDown':
+            moverAbajo()
+            break;
+        case 'ArrowLeft':
+            moverIzquierda()
+            break;
+        case 'ArrowRight':
+            moverDerecha()
+            break;
+        default:
+            break;
+    }
+}
+
+function iniciarMapa(){
+    intervalo = setInterval(pintarPersonaje, 50)
+
+    window.addEventListener('keydown', sePresionoUnaTecla)
+    
+    window.addEventListener('keyup', detenerMovimiendo)
 }
 
 function reiniciarJuego(){
