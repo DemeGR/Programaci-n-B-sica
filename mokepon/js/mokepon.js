@@ -48,21 +48,32 @@ let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = './assets/mokemap.png'
 let mascotaJugadorObjeto
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximoDelMapa = 350
 let vidasJugador = 3
 let vidasEnemigo = 3
 
+if(anchoDelMapa > anchoMaximoDelMapa){
+    anchoDelMapa = anchoMaximoDelMapa - 20  //si la venta esta muy grande, el ancho del mapa no superara los 350px
+}
+alturaQueBuscamos = anchoDelMapa * 600/800
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
+
 //Clases. Los clases deben de empezar con mayuscula
 class Mokepon{
-    constructor(nombre, foto, vida,fotoMapa,x=10,y=10 ){
+    constructor(nombre, foto, vida,fotoMapa){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
         this.ataque = []
-        this.x = x    //se agregan x y y para poder mandener y actualizar los alores
-        this.y = y
         this.ancho = 40
         this.alto = 40
+        this.x = aleatorio(0,mapa.width - this.ancho)   
+        this.y = aleatorio(0,mapa.height - this.alto)
+        
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadx = 0
@@ -95,18 +106,18 @@ let pydos = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5,'
 let tucapalma = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5,'./assets/tucapalma.png')
 
 
-let hipodogeEnemigo = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.png',80,120)
+let hipodogeEnemigo = new Mokepon('Hipodoge', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.png')
 
-let capipepoEnemigo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack.png',5, './assets/capipepo.png',150,95)
+let capipepoEnemigo = new Mokepon('Capipepo','./assets/mokepons_mokepon_capipepo_attack.png',5, './assets/capipepo.png')
 
-let ratigueyaEnemigo = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5, './assets/ratigueya.png',200,190)
+let ratigueyaEnemigo = new Mokepon('Ratigueya','./assets/mokepons_mokepon_ratigueya_attack.png',5, './assets/ratigueya.png')
 
 //nuevos jugadores
 let langostelvisEnemigo = new Mokepon('Langostelvis','./assets/mokepons_mokepon_langostelvis_attack.png',5,'./assets/langostelvis.png',220,60)
 
-let pydosEnemigo = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5,'./assets/pydos.png', 100,70)
+let pydosEnemigo = new Mokepon('Pydos','./assets/mokepons_mokepon_pydos_attack.png',5,'./assets/pydos.png')
 
-let tucapalmaEnemigo = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5,'./assets/tucapalma.png',180,20)
+let tucapalmaEnemigo = new Mokepon('Tucapalma','./assets/mokepons_mokepon_tucapalma_attack.png',5,'./assets/tucapalma.png')
 
 //creacion de un objeto
 hipodoge.ataques.push( 
@@ -161,7 +172,7 @@ pydos.ataques.push(
 )
 
 //creacion de un objeto
-hipodoge.ataques.push( 
+hipodogeEnemigo.ataques.push( 
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
@@ -170,7 +181,7 @@ hipodoge.ataques.push(
 )
 
 //creacion de un objeto
-capipepo.ataques.push( 
+capipepoEnemigo.ataques.push( 
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
@@ -534,8 +545,7 @@ function sePresionoUnaTecla(event){
 }
 
 function iniciarMapa(){
-    mapa.width = 320
-    mapa.height = 240
+    
     mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
     console.log(mascotaJugadorObjeto, mascotaJugador)
     intervalo = setInterval(pintarCanvas, 50)
