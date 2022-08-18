@@ -160,8 +160,59 @@ pydos.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
+//creacion de un objeto
+hipodoge.ataques.push( 
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
 
-mokepones.push(hipodoge, capipepo,ratigueya,langostelvis,pydos,tucapalma)
+//creacion de un objeto
+capipepo.ataques.push( 
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    
+)
+
+//creacion de un objeto
+ratigueyaEnemigo.ataques.push( 
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+langostelvisEnemigo.ataques.push( 
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+tucapalmaEnemigo.ataques.push( 
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '💨', id: 'boton-aire' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+pydosEnemigo.ataques.push( 
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+mokepones.push(hipodoge, capipepo,ratigueya,pydos,tucapalma,langostelvis)
 
 function iniciarJuego(){
     
@@ -232,7 +283,7 @@ function seleccionarMascotaJugador(){
    sectionVerMapa.style.display = 'flex'
    iniciarMapa()
    //llamar funcion seleccion del enemigo
-   seleccionarMascotaEnemigo()
+   //seleccionarMascotaEnemigo()
 }
 
 function extraerAtaques(mascotaJugador){
@@ -242,7 +293,7 @@ function extraerAtaques(mascotaJugador){
                 ataques = mokepones[i].ataques
         }
     }
-    
+    console.log(ataques)
     mostrarAtaques(ataques)
 }
 
@@ -299,13 +350,18 @@ function secuenciaAtaque(){
 }
 
 //funcion seleccionar mascota enemigo
-function seleccionarMascotaEnemigo(){
-    let mascotaAleatoria = aleatorio(0,mokepones.length -1)  //0: desde el indice cero
+function seleccionarMascotaEnemigo(enemigo){
+   // let mascotaAleatoria = aleatorio(0,mokepones.length -1)  //0: desde el indice cero
                                                             //mokepones.length: logitud de la cadena
                                                             //-1: porque la logitud de un array es una menos
     
-  spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
-  ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques    //guarda los ataques NOTA!
+  //spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre  //el arreglo llama a la mascota correspondiente. El .innerHMTL lo agrega en la parte de mascotas seleccionadas.
+
+  //spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
+  //ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques    //guarda los ataques NOTA!
+
+  spanMascotaEnemigo.innerHTML = enemigo.nombre
+  ataquesMokeponEnemigo = enemigo.ataques   
   console.log(ataquesMokeponEnemigo)
   console.log(ataquesMokeponEnemigo[2])
   secuenciaAtaque()
@@ -368,7 +424,8 @@ function combate(){
         }else if(( ataqueJugador[index] === 'FUEGO' &&  ataqueEnemigo[index] === 'TIERRA') ||
                  (ataqueJugador[index] === 'AGUA' &&  ataqueEnemigo[index] === 'FUEGO') ||
                  (ataqueJugador[index] === 'TIERRA' &&  ataqueEnemigo[index] === 'AGUA') ||
-                 (ataqueJugador[index] === 'AIRE' &&  ataqueEnemigo[index] === 'TIERRA') ){
+                 (ataqueJugador[index] === 'AIRE' &&  ataqueEnemigo[index] === 'TIERRA') ||
+                 (ataqueJugador[index] === 'FUEGO' &&  ataqueEnemigo[index] === 'AIRE')  ){
                     indexAmbosOponentes(index, index)
                     crearMensaje("GANASTE :)")   
                     victoriasJugador++
@@ -507,17 +564,21 @@ function revisarColision(enemigo){
     const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
     const izquierdaMascota = mascotaJugadorObjeto.x 
 
-    if(
+    if(                                     //Si algunas de las condiciones se cumple sigifica  que no hubo una colision 
         abajoMascota < arribaEnemigo ||
         arribaMascota > abajoEnemigo ||
         derechaMascota < izquierdaEnemigo ||
         izquierdaMascota > derechaEnemigo 
     ){
-        return
-    }
-
+        return;                            //No hacer nada y salir de la funcion   
+     }
+                                          // Estas instrucciones se cumplen porque no se cumplio el if
     detenerMovimiendo()
-    alert("Hay colision"+enemigo.nombre)
+    clearInterval(intervalo)                //detiene el intervalo que se ejecuta cada 50ms
+    console.log('se detecto una colision')
+    sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'none'
+    seleccionarMascotaEnemigo(enemigo)          
 }
 
 function reiniciarJuego(){
