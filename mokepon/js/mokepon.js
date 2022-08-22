@@ -52,6 +52,7 @@ let alturaQueBuscamos
 let anchoDelMapa = window.innerWidth - 20
 const anchoMaximoDelMapa = 350
 let jugadorId =null //se desconoce su valor
+let mokeponesEnemigos = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -470,12 +471,10 @@ function pintarCanvas(){
     mascotaJugadorObjeto.pintarMokepon()
 
     enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
-    hipodogeEnemigo.pintarMokepon()
-    capipepoEnemigo.pintarMokepon()
-    ratigueyaEnemigo.pintarMokepon()
-    pydosEnemigo.pintarMokepon()
-    tucapalmaEnemigo.pintarMokepon()
-    langostelvisEnemigo.pintarMokepon()
+
+    mokeponesEnemigos.forEach(function(mokepon){
+        mokepon.pintarMokepon()
+    })
 
     if(mascotaJugadorObjeto.velocidadx !== 0 || mascotaJugadorObjeto.velocidady !== 0){
         revisarColision(hipodogeEnemigo)
@@ -506,8 +505,7 @@ function enviarPosicion(x,y){
                                     //estrae la variable especifica de la respuesta
             .then(function({enemigos/*es la misma variable escrita en res.send del servido */}){
                 console.log(enemigos)
-
-                enemigos.forEach(function(enemigo){
+                mokeponesEnemigos = enemigos.map(function(enemigo){//va a retornar una lista 
                     let mokeponEnemigo = null
                     const mokeponNombre = enemigo.mokepon.nombre || ""
                     if(mokeponNombre === "Hipodoge"){
@@ -527,7 +525,7 @@ function enviarPosicion(x,y){
                     mokeponEnemigo.x=enemigo.x
                     mokeponEnemigo.y=enemigo.y
                     
-                    mokeponEnemigo.pintarMokepon()
+                return mokeponEnemigo
 
                     
                 })
