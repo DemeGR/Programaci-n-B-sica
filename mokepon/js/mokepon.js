@@ -254,10 +254,24 @@ function iniciarJuego(){
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
      //seleccion del ataque 
     
-    
-
     botonReiniciar.addEventListener('click', reiniciarJuego)
+
+    unirseAlJuego()  
 }
+
+function unirseAlJuego(){
+   fetch("http://localhost:8080/unirse")
+    .then(function(res){
+        if(res.ok){//si hay respuesta y todo salio bien, hacer...
+            res.text()
+             .then(function(respuesta){
+                console.log(respuesta)
+             })
+        }
+    })
+   
+}
+
 function seleccionarMascotaJugador(){
     
     sectionSeleccionarMascota.style.display = 'none'//style mofica propedades. display oculta los 
