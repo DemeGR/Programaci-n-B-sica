@@ -69,7 +69,11 @@ app.post("/mokepon/:jugadorId/posicion",(req,res) =>{
         jugadores[jugadorIndex].actualizarPosicion(x,y)
     }
 
-    res.end()//se da respuesta
+    const enemigos = jugadores.filter((jugador) => jugadorId !== jugador.id)//devulve los enemigos
+
+    res.send({//devulve un JSON que contenga la lista
+        enemigos
+    })
 })//API que se va a consumir
 
 app.listen(8080, ()=>{//4.-que escuche continuamente en el puerto 8080 las peticiones de los cleintes para que le pueda responder
