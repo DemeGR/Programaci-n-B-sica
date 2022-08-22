@@ -51,6 +51,7 @@ let mascotaJugadorObjeto
 let alturaQueBuscamos
 let anchoDelMapa = window.innerWidth - 20
 const anchoMaximoDelMapa = 350
+let jugadorId =null //se desconoce su valor
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -266,6 +267,7 @@ function unirseAlJuego(){
             res.text()
              .then(function(respuesta){
                 console.log(respuesta)
+                jugadorId = respuesta
              })
         }
     })
@@ -303,12 +305,26 @@ function seleccionarMascotaJugador(){
             }else{
             alert('Selecciona una mascota')
            }
+    
+   seleccionarMokepon(mascotaJugador)
 
    extraerAtaques(mascotaJugador)
    sectionVerMapa.style.display = 'flex'
    iniciarMapa()
    //llamar funcion seleccion del enemigo
    //seleccionarMascotaEnemigo()
+}
+
+function seleccionarMokepon(mascotaJugador){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            mokepon: mascotaJugador
+        })
+    })
 }
 
 function extraerAtaques(mascotaJugador){

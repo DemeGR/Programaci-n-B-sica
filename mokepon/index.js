@@ -1,13 +1,27 @@
 const express  = require("express")//1.-se importa express para poder utilizarlo en el proyecto
+const cors = require("cors")  //libreria que trabaja con esxpress
 
 const app = express()//2.-se crea una aplicion con express
 //url y cómo se respondera a la solicitud
 
+app.use(cors()) //se le dice que express que utilice la libreria de cors
+app.use(express.json()) //para poder trabajar con post se habillita json
 const jugadores = []
 
 class Jugador{
     constructor(id){
         this.id=id
+    }
+
+    asignarMokepon(mokepon){//una vez que se tenga la clase, se le aasigna un mmokepon
+        this.mokepon= mokepon
+    }
+
+}
+
+class Mokepon{
+    constructor(nombre){
+        this.nombre = nombre
     }
 }
 
@@ -21,6 +35,23 @@ app.get("/Unirse",(req/*peticion*/ , res/*respuesta*/ )=>{//3.-cuando se resive 
     res.setHeader("Access-Control-Allow-Origin","*"/*cualquier origen es valido */)//permitir acceso
 
     res.send(id)
+})
+
+//habilitar peticion
+app.post("/mokepon/:jugadorId",(req, res) =>{  //packages
+    const jugadorId = req.params.jugadorId || ""
+    const nombre = req.body.mokepon/*vine de la funcion seleccionarMokepon() */ || "" //se extra el nombre del mokepon 
+    const mokepon = new Mokepon(nombre)
+
+    const jugadorIndex = jugadores.findIndex((jugador)=> jugadorId === jugador.id)
+
+    if(jugadorIndex >= 0){
+        jugadores[jugadorIndex]/*se le agrega un mokepon*/.asignarMokepon(mokepon)
+    }
+
+    console.log(jugadores)
+    console.log(jugadorId)
+    res.end()
 })
 
 app.listen(8080, ()=>{//4.-que escuche continuamente en el puerto 8080 las peticiones de los cleintes para que le pueda responder
